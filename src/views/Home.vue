@@ -63,7 +63,7 @@
                 </div>
                 <div class="text-gray-500 mr-4">
                   <span class="text-sm me-2"><i class="fas fa-calendar-days"></i></span>
-                  <span class="text-sm">{{ new Date(concurso.data_prova).toLocaleDateString('pt-BR') }}</span>
+                  <span class="text-sm">{{ new Date(concurso.data_prova).toLocaleDateString('pt-BR', { timeZone: 'UTC' }) }}</span>
                 </div>
               </div>
             </div>
