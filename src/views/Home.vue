@@ -1,15 +1,13 @@
 <template>
-  <div class="bg-gray-50 min-h-screen">
+  <div class="flex flex-col h-screen">
     <!-- Barra de título -->
-    <div class="border-b">
-      <div class="container mx-auto py-4 px-8">
-        <h1 class="text-2xl font-bold text-btn-filter">Tracker - Rastreador de Concurso Público</h1>
-      </div>
+    <div class="py-4 border-b sticky top-0 bg-btn-new">
+      <h1 class="container mx-auto text-2xl font-bold text-white">Tracker - Rastreador de Concurso Público</h1>
     </div>
 
     <!-- Seção de botões -->
-    <div class="bg-white border-b">
-      <div class="container mx-auto py-4 px-8 flex justify-between">
+    <div class="container mx-auto mt-8">
+      <div class="flex justify-between">
         <div class="space-x-4">
           <div class="inline-flex rounded-md shadow-sm" role="group">
             <button
@@ -36,19 +34,18 @@
           <button class="bg-btn-new text-white px-4 py-2 rounded hover:bg-green-700 inline-flex items-center"
             @click="openSidebar">
             <i class="fas fa-swatchbook mr-2"></i>
-            Cadastrar Concurso
+            Novo Concurso
           </button>
-
         </div>
       </div>
     </div>
 
     <!-- Seção de cards -->
-    <div class="container mx-auto py-8 px-8">
-      <div v-if="filteredConcursos.length > 0" class="mb-8">
-        <div class="grid grid-cols-2 gap-8">
+    <div class="container mx-auto flex-grow overflow-hidden mt-8">
+      <div v-if="filteredConcursos.length > 0" class="cards-container mb-8 overflow-auto">
+        <div class="grid grid-cols-2 gap-8 mb-8">
           <router-link :to="`/concurso/${concurso.id}`" v-for="(concurso, index) in filteredConcursos" :key="index"
-            class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+            class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-stone-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
             <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
               src="../assets/images/Exams-bro.png" :alt="concurso.cargo" />
             <div class="flex flex-col justify-between p-4 leading-normal">
@@ -72,45 +69,55 @@
     </div>
 
     <!-- Sidebar -->
-    <div class="relative min-h-screen bg-gray-50">
+    <div class="relative bg-stone-100">
       <!-- Overlay -->
       <div v-if="isSidebarOpen" class="fixed inset-0 bg-black opacity-50 z-40" @click="closeSidebar"></div>
 
       <!-- Formulário de Cadastro -->
       <transition name="slide">
-        <div v-if="isSidebarOpen" class="fixed inset-y-0 right-0 bg-white shadow-xl w-1/3 z-50 p-4">
-          <div class="bg-gray-100">
-            <h2 class="text-center text-btn-filter p-4 text-2xl font-bold mb-4">Cadastrar Concurso</h2>
+        <div v-if="isSidebarOpen" class="fixed inset-y-0 right-0 bg-stone-100 shadow-xl w-1/3 z-50 p-8">
+          <div>
+            <h2 class="text-btn-new text-3xl font-medium mb-4">Novo Concurso</h2>
           </div>
 
           <form @submit.prevent="submitForm">
-            <div class="mb-4">
+            <div class="mb-1">
               <label class="block text-gray-700">Órgão</label>
               <input v-model="concurso.orgao" type="text"
                 class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-btn-filter"
                 required>
             </div>
-            <div class="mb-4">
+            <div class="mb-1">
               <label class="block text-gray-700">Cargo</label>
               <input v-model="concurso.cargo" type="text"
                 class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-btn-filter"
                 required>
             </div>
-            <div class="mb-4">
-              <label class="block text-gray-700">Número de Vagas</label>
-              <input v-model="concurso.numero_vaga" type="number"
-                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-btn-filter"
-                required>
-            </div>
-            <div class="mb-4">
-              <label class="block text-gray-700">Banca</label>
-              <input v-model="concurso.banca" type="text"
-                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-btn-filter"
-                required>
-            </div>
             <div class="flex flex-wrap -mx-4">
+              <div class="w-full md:w-1/2 px-4 mb-1">
+                <label class="block text-gray-700">Número de Vagas</label>
+                <input v-model="concurso.numero_vaga" type="number"
+                  class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-btn-filter"
+                  required>
+              </div>
+              <div class="w-full md:w-1/2 px-4 mb-1">
+                <label class="block text-gray-700">Banca</label>
+                <input v-model="concurso.banca" type="text"
+                  class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-btn-filter"
+                  required>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap -mx-4">
+              <!-- Campo Data da Prova -->
+              <div class="w-full md:w-1/2 px-4 mb-1">
+                <label class="block text-gray-700">Data da Prova</label>
+                <input v-model="concurso.data_prova" type="date"
+                  class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-btn-filter"
+                  required>
+              </div>
               <!-- Campo Status -->
-              <div class="w-full md:w-1/2 px-4 mb-4">
+              <div class="w-full md:w-1/2 px-4 mb-1">
                 <label class="block text-gray-700">Status</label>
                 <select v-model="concurso.status"
                   class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-btn-filter"
@@ -119,23 +126,15 @@
                   <option value="realizado">Realizado</option>
                 </select>
               </div>
-
-              <!-- Campo Data da Prova -->
-              <div class="w-full md:w-1/2 px-4 mb-4">
-                <label class="block text-gray-700">Data da Prova</label>
-                <input v-model="concurso.data_prova" type="date"
-                  class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-btn-filter"
-                  required>
-              </div>
             </div>
-            <div class="flex justify-end mt-6">
+            <div class="absolute inset-x-0 bottom-4 flex justify-end px-4">
               <button type="submit" class="bg-btn-new text-white px-4 py-2 rounded hover:bg-green-700">
                 <i class="fas fa-check-double mr-2"></i>
                 Salvar
               </button>
               <button type="button" class="ml-2 bg-btn-filter text-white px-4 py-2 rounded hover:bg-btn-filter-dark"
                 @click="closeSidebar">
-                <i class="fas fa-circle-left mr-2"></i>
+                <i class="fas fa-circle-right mr-2"></i>
                 Cancelar
               </button>
             </div>
@@ -179,78 +178,72 @@ export default {
 
     const submitForm = async () => {
       const { error } = await supabase.from('concursos').insert([concurso.value]);
+
       if (error) {
-        console.error('Erro ao salvar concurso:', error.message);
-        return;
+        toast.error('Erro ao salvar concurso.');
+      } else {
+        toast.success('Concurso salvo com sucesso!');
+        fetchConcursos();
+        closeSidebar();
+        concurso.value = {
+          orgao: '',
+          cargo: '',
+          numero_vaga: '',
+          banca: '',
+          status: 'a_realizar',
+          data_prova: ''
+        };
       }
-      closeSidebar();
-      resetForm();
-      loadConcursos();
-      toast.success('Concurso cadastrado com sucesso!');
     };
 
-    const resetForm = () => {
-      concurso.value = {
-        orgao: '',
-        cargo: '',
-        numero_vaga: '',
-        banca: '',
-        status: 'a_realizar',
-        data_prova: ''
-      };
-    };
+    const fetchConcursos = async () => {
+      const { data, error } = await supabase.from('concursos').select('*');
 
-    const loadConcursos = async () => {
-      const { data, error } = await supabase.from('concursos').select('*').order('data_prova', { ascending: true });
       if (error) {
-        console.error('Erro ao buscar concursos:', error.message);
-        return;
+        toast.error('Erro ao buscar concursos.');
+      } else {
+        concursos.value = data;
+        filterConcursos(selectedFilter.value);
       }
-      concursos.value = data;
-      filterConcursos(selectedFilter.value);
     };
 
     const filterConcursos = (filter) => {
       selectedFilter.value = filter;
       if (filter === 'all') {
         filteredConcursos.value = concursos.value;
-      } else if (filter === 'realizado') {
-        filteredConcursos.value = concursos.value.filter(concurso => concurso.status === 'realizado');
-      } else if (filter === 'a_realizar') {
-        filteredConcursos.value = concursos.value.filter(concurso => concurso.status === 'a_realizar');
+      } else {
+        filteredConcursos.value = concursos.value.filter((concurso) => concurso.status === filter);
       }
     };
 
-    onMounted(async () => {
-      await loadConcursos();
+    onMounted(() => {
+      fetchConcursos();
     });
 
     return {
+      isSidebarOpen,
+      concursos,
       filteredConcursos,
       selectedFilter,
-      openSidebar,
-      isSidebarOpen,
       concurso,
+      openSidebar,
       closeSidebar,
       submitForm,
-      filterConcursos  // Certifique-se de incluir filterConcursos no retorno do setup()
+      filterConcursos
     };
-  },
+  }
 };
 </script>
 
-
-<style scoped>
-.slide-enter-active,
-.slide-leave-active {
-  transition: transform 0.3s ease;
+<style>
+.cards-container {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  overflow-y: scroll;
+  height: 100%; /* Ensure it takes full height of its container */
 }
 
-.slide-enter {
-  transform: translateX(100%);
-}
-
-.slide-leave-to {
-  transform: translateX(100%);
+.cards-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 </style>
