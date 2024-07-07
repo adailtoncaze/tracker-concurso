@@ -48,17 +48,24 @@
             class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-stone-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
             <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
               src="../assets/images/Exams-bro.png" :alt="concurso.cargo" />
-            <div class="flex flex-col justify-between p-4 leading-normal">
+            <div class="flex flex-col justify-between w-full p-4 leading-normal">
               <h5 class="mb-2 text-2xl font-bold tracking-tight text-btn-filter-dark">{{ concurso.orgao }}</h5>
               <h5 class="mb-2 text-xl font-bold tracking-tight text-btn-filter">{{ concurso.cargo }}</h5>
-              <p class="text-gray-600 mt-8">
-                <span class="text-sm">Status:</span> <span :class="{
-                  'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300': concurso.status === 'realizado',
-                  'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300': concurso.status === 'a_realizar'
-                }" class="text-xs font-medium me-2 px-2.5 py-0.5 rounded">
-                  {{ concurso.status === 'realizado' ? 'Realizado' : 'A Realizar' }}
-                </span>
-              </p>
+              <div class="flex justify-between w-full mt-8">
+                <div>
+                  <span class="text-sm me-2">Status:</span>
+                  <span :class="{
+                    'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300': concurso.status === 'realizado',
+                    'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300': concurso.status === 'a_realizar'
+                  }" class="text-xs font-medium px-2.5 py-0.5 rounded">
+                    {{ concurso.status === 'realizado' ? 'Realizado' : 'A Realizar' }}
+                  </span>
+                </div>
+                <div class="text-gray-500 mr-4">
+                  <span class="text-sm me-2"><i class="fas fa-calendar-days"></i></span>
+                  <span class="text-sm">{{ new Date(concurso.data_prova).toLocaleDateString('pt-BR') }}</span>
+                </div>
+              </div>
             </div>
           </router-link>
         </div>
@@ -67,6 +74,7 @@
         <p class="text-center text-gray-500">Nenhum concurso encontrado.</p>
       </div>
     </div>
+
 
     <!-- Sidebar -->
     <div class="relative bg-stone-100">
@@ -197,7 +205,7 @@ export default {
     };
 
     const fetchConcursos = async () => {
-      const { data, error } = await supabase.from('concursos').select('*');
+      const { data, error } = await supabase.from('concursos').select('*').order('data_prova');
 
       if (error) {
         toast.error('Erro ao buscar concursos.');
@@ -237,13 +245,17 @@ export default {
 
 <style>
 .cards-container {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
   overflow-y: scroll;
-  height: 100%; /* Ensure it takes full height of its container */
+  height: 100%;
+  /* Ensure it takes full height of its container */
 }
 
 .cards-container::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
+  /* Chrome, Safari, Opera */
 }
 </style>
