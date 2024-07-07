@@ -3,8 +3,8 @@
     <h1>Detalhes do Concurso</h1>
     <form @submit.prevent="atualizarConcurso">
       <div>
-        <label for="nome">Nome:</label>
-        <input type="text" v-model="concurso.nome" required />
+        <label for="nome">Cargo:</label>
+        <input type="text" v-model="concurso.cargo" required />
       </div>
       <div>
         <label for="orgao">Órgão:</label>

@@ -2,7 +2,11 @@
   <div class="flex flex-col h-screen">
     <!-- Barra de título -->
     <div class="py-4 border-b sticky top-0 bg-btn-new">
-      <h1 class="container mx-auto text-2xl font-bold text-white">Tracker - Rastreador de Concurso Público</h1>
+      <div class="container mx-auto">
+        <router-link to="/">
+          <img src="../assets/logo.svg" alt="Tracker Logo" class="h-10">
+        </router-link>
+      </div>
     </div>
 
     <!-- Seção de botões -->
@@ -61,9 +65,10 @@
                     {{ concurso.status === 'realizado' ? 'Realizado' : 'A Realizar' }}
                   </span>
                 </div>
-                <div class="text-gray-500 mr-4">
-                  <span class="text-sm me-2"><i class="fas fa-calendar-days"></i></span>
-                  <span class="text-sm">{{ new Date(concurso.data_prova).toLocaleDateString('pt-BR', { timeZone: 'UTC' }) }}</span>
+                <div class="mr-4">
+                  <span class="text-sm me-2 text-gray-00"><i class="fas fa-calendar-days"></i></span>
+                  <span class="text-sm text-gray-500">{{ new Date(concurso.data_prova).toLocaleDateString('pt-BR', {
+                    timeZone: 'UTC' }) }}</span>
                 </div>
               </div>
             </div>
@@ -188,9 +193,9 @@ export default {
       const { error } = await supabase.from('concursos').insert([concurso.value]);
 
       if (error) {
-        toast.error('Erro ao salvar concurso.');
+        toast.error('Erro ao cadastrar concurso.');
       } else {
-        toast.success('Concurso salvo com sucesso!');
+        toast.success('Concurso cadastrado com sucesso!');
         fetchConcursos();
         closeSidebar();
         concurso.value = {
