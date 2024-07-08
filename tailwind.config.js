@@ -10,7 +10,8 @@ module.exports = {
       colors: {
         'btn-filter': '#32475B',
         'btn-filter-dark': '#2b3946',
-        'btn-new': '#3FB27F'
+        'btn-new': '#3FB27F',
+        'btn-green-new': '44C38B'
       }
     },
     

@@ -33,7 +33,7 @@
           </div>
         </div>
         <div>
-          <button class="bg-btn-new text-white px-4 py-2 rounded hover:bg-green-700 inline-flex items-center"
+          <button class="bg-btn-new text-white px-4 py-2 rounded hover:bg-green-600 inline-flex items-center"
             @click="openSidebar">
             <i class="fas fa-swatchbook mr-2"></i>
             Novo Concurso
@@ -139,7 +139,7 @@
               </div>
             </div>
             <div class="absolute inset-x-0 bottom-4 flex justify-end px-4">
-              <button type="submit" class="bg-btn-new text-white px-4 py-2 rounded hover:bg-green-700">
+              <button type="submit" class="bg-btn-new text-white px-4 py-2 rounded hover:bg-green-600">
                 <i class="fas fa-check-double mr-2"></i>
                 Salvar
               </button>
