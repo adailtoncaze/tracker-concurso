@@ -3,9 +3,7 @@
     <!-- Barra de título -->
     <div class="py-4 border-b sticky top-0 bg-btn-new">
       <div class="container mx-auto">
-        <router-link to="/">
-          <img src="../assets/logo.svg" alt="Tracker Logo" class="h-10">
-        </router-link>
+          <img src="../assets/logo2.svg" alt="Tracker Logo" class="h-12">
       </div>
     </div>
 
