@@ -3,49 +3,50 @@
     <!-- Barra de título -->
     <div class="py-4 border-b sticky top-0 bg-btn-new">
       <div class="container mx-auto">
-          <img src="../assets/logo2.svg" alt="Tracker Logo" class="h-12">
+        <img src="../assets/logo2.svg" alt="Tracker Logo" class="h-12">
       </div>
     </div>
-
+    
     <!-- Seção de botões -->
-    <div class="container mx-auto mt-8">
-      <div class="flex justify-between">
-        <div class="space-x-4">
-          <div class="inline-flex rounded-md shadow-sm" role="group">
-            <button
-              class="px-4 py-2 text-sm font-medium border border-btn-filter rounded-s-lg hover:bg-btn-filter hover:text-white focus:outline-none"
-              :class="{ 'bg-btn-filter text-white': selectedFilter === 'all', 'text-gray-900': selectedFilter !== 'all' }"
-              @click="filterConcursos('all')">
-              Todos
-            </button>
-            <button type="button"
-              class="px-4 py-2 text-sm font-medium border-t border-b border-btn-filter hover:bg-btn-filter hover:text-white focus:outline-none"
-              :class="{ 'bg-btn-filter text-white': selectedFilter === 'realizado', 'text-gray-900': selectedFilter !== 'realizado' }"
-              @click="filterConcursos('realizado')">
-              Realizado
-            </button>
-            <button type="button"
-              class="px-4 py-2 text-sm font-medium border border-btn-filter rounded-e-lg hover:bg-btn-filter hover:text-white focus:outline-none"
-              :class="{ 'bg-btn-filter text-white': selectedFilter === 'a_realizar', 'text-gray-900': selectedFilter !== 'a_realizar' }"
-              @click="filterConcursos('a_realizar')">
-              A Realizar
-            </button>
-          </div>
-        </div>
-        <div>
-          <button class="bg-btn-new text-white px-4 py-2 rounded hover:bg-green-600 inline-flex items-center"
-            @click="openSidebar">
-            <i class="fas fa-swatchbook mr-2"></i>
-            Novo Concurso
-          </button>
-        </div>
+<div class="container mx-auto mt-8 px-4 sm:px-0 md:px-4">
+  <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0">
+    <div class="w-full sm:w-auto">
+      <div class="flex flex-wrap rounded-md shadow-sm" role="group">
+        <button
+          class="flex-grow sm:flex-grow-0 px-4 py-2 text-sm font-medium border border-btn-filter rounded-s-lg hover:bg-btn-filter hover:text-white focus:outline-none"
+          :class="{ 'bg-btn-filter text-white': selectedFilter === 'all', 'text-gray-900': selectedFilter !== 'all' }"
+          @click="filterConcursos('all')">
+          Todos
+        </button>
+        <button
+          class="flex-grow sm:flex-grow-0 px-4 py-2 text-sm font-medium border-t border-b border-btn-filter hover:bg-btn-filter hover:text-white focus:outline-none"
+          :class="{ 'bg-btn-filter text-white': selectedFilter === 'realizado', 'text-gray-900': selectedFilter !== 'realizado' }"
+          @click="filterConcursos('realizado')">
+          Realizado
+        </button>
+        <button
+          class="flex-grow sm:flex-grow-0 px-4 py-2 text-sm font-medium border border-btn-filter rounded-e-lg hover:bg-btn-filter hover:text-white focus:outline-none"
+          :class="{ 'bg-btn-filter text-white': selectedFilter === 'a_realizar', 'text-gray-900': selectedFilter !== 'a_realizar' }"
+          @click="filterConcursos('a_realizar')">
+          A Realizar
+        </button>
       </div>
     </div>
+    <div class="w-full sm:w-auto">
+      <button class="w-full sm:w-auto bg-btn-new text-white px-4 py-2 rounded hover:bg-green-600 items-center"
+        @click="openSidebar">
+        <i class="fas fa-swatchbook mr-2"></i>
+        Novo Concurso
+      </button>
+    </div>
+  </div>
+</div>
 
+   
     <!-- Seção de cards -->
     <div class="container mx-auto flex-grow overflow-hidden mt-8">
       <div v-if="filteredConcursos.length > 0" class="cards-container mb-8 overflow-auto">
-        <div class="grid grid-cols-2 gap-8 mb-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-8 mb-8 px-4 sm:px-0 md:px-4">
           <router-link :to="`/concurso/${concurso.id}`" v-for="(concurso, index) in filteredConcursos" :key="index"
             class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-stone-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
             <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
@@ -66,7 +67,8 @@
                 <div class="mr-4">
                   <span class="text-sm me-2 text-gray-00"><i class="fas fa-calendar-days"></i></span>
                   <span class="text-sm text-gray-500">{{ new Date(concurso.data_prova).toLocaleDateString('pt-BR', {
-                    timeZone: 'UTC' }) }}</span>
+                    timeZone: 'UTC'
+                  }) }}</span>
                 </div>
               </div>
             </div>
@@ -86,7 +88,7 @@
 
       <!-- Formulário de Cadastro -->
       <transition name="slide">
-        <div v-if="isSidebarOpen" class="fixed inset-y-0 right-0 bg-stone-100 shadow-xl w-1/3 z-50 p-8">
+        <div v-if="isSidebarOpen" class="fixed inset-y-0 right-0 bg-stone-100 shadow-xl w-full md:w-1/2 z-50 p-8">
           <div>
             <h2 class="text-btn-new text-3xl font-medium mb-4">Novo Concurso</h2>
           </div>
