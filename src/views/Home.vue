@@ -88,7 +88,7 @@
 
       <!-- Formulário de Cadastro -->
       <transition name="slide">
-        <div v-if="isSidebarOpen" class="fixed inset-y-0 right-0 bg-stone-100 shadow-xl w-full md:w-1/2 z-50 p-8">
+        <div v-if="isSidebarOpen" class="fixed inset-y-0 right-0 bg-stone-100 shadow-xl w-full md:w-1/2 lg:w-1/3 z-50 p-8">
           <div>
             <h2 class="text-btn-new text-3xl font-medium mb-4">Novo Concurso</h2>
           </div>
