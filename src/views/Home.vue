@@ -49,7 +49,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-8 mb-8 px-4 sm:px-0 md:px-4">
           <router-link :to="`/concurso/${concurso.id}`" v-for="(concurso, index) in filteredConcursos" :key="index"
             class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-stone-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-            <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
+            <img class="object-cover w-56 rounded-t-lg h-56 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
               src="../assets/images/Exams-bro.png" :alt="concurso.cargo" />
             <div class="flex flex-col justify-between w-full p-4 leading-normal">
               <h5 class="mb-2 text-2xl font-bold tracking-tight text-btn-filter-dark">{{ concurso.orgao }}</h5>
